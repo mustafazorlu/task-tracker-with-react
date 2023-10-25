@@ -1,0 +1,54 @@
+//import manrope font
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+*{
+    margin:0;
+    padding:0;
+    user-select: none;
+}
+
+body{
+    font-family: 'Manrope', sans-serif;
+    background-color: #eee;
+}
+
+.app{
+    max-width: 450px;
+    margin:30px auto;
+    padding:2rem;
+    border:2px dashed #aaa;
+    border-radius: 10px;
+}
+
+.add_btn{
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+  transition: 0.1s ease all;
+
+  &:active{
+    transform: scale(0.95);
+  }
+}
+
+
+.btn{
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+  transition: 0.1s ease all;
+}
