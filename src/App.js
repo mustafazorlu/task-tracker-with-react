@@ -2,36 +2,36 @@ import AddTodo from "./components/AddTodo";
 import Header from "./components/Header";
 import Todos from "./components/Todos";
 import todosArr from "./todos";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-    const [todos, setTodos] = useState(todosArr);
+    const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')));
     const [showBtn, setShowBtn] = useState(false);
+    useEffect(() => {
+        if (!localStorage.getItem("todos")) {
+            localStorage.setItem("todos", JSON.stringify([{}]));
+        }
+    });
 
-    const localStorageHandler = () => {
-        localStorage.setItem('todos', JSON.stringify(todos))
-    }
 
     const addTodoHandler = (todo) => {
-        let id = todosArr.length + 1;
+        let id = todos.length + 1;
         const newTodo = {
             id,
             ...todo,
         };
-        ;
-        
-        
-        localStorage.setItem('todos',  JSON.stringify(setTodos([...todos, newTodo])))
-        localStorageHandler();
+        setTodos([...todos, newTodo]);
+
         console.log(todos);
+        localStorage.setItem("todos", JSON.stringify(todos));
     };
 
     const deleteHandler = (todoID) => {
         setTodos(todos.filter((todo) => todo.id !== todoID));
+        localStorage.setItem("todos", JSON.stringify(todos));
     };
 
     const reminderHandler = (todoID) => {
-        
         setTodos(
             todos.map((todo) =>
                 todo.id === todoID
@@ -40,7 +40,7 @@ function App() {
             )
         );
     };
-    const storage = JSON.parse(localStorage.getItem('todos'))
+
     return (
         <div className="app">
             <Header setShowBtn={setShowBtn} showBtn={showBtn} />
@@ -49,7 +49,7 @@ function App() {
 
             {todos.length > 0 ? (
                 <Todos
-                    todos={storage}
+                    todos={todos}
                     reminderHandler={reminderHandler}
                     deleteHandler={deleteHandler}
                 />
